@@ -13,9 +13,12 @@ paramSweep <- function(seu, PCs=1:10, sct = FALSE, num.cores=1) {
   orig.commands <- seu@commands
 
   ## Down-sample cells to 10000 (when applicable) for computational effiency
+  ## 12/04/2023 Edit to fix paramsweep bug
+  ## Will edit to read seu@assays[["RNA"]]@counts
+  ## instead of seu@assays$RNA$counts
   if (nrow(seu@meta.data) > 10000) {
     real.cells <- rownames(seu@meta.data)[sample(1:nrow(seu@meta.data), 10000, replace=FALSE)]
-    data <- seu@assays$RNA$counts[ , real.cells]
+    data <- seu@assays[["RNA"]]@counts[ , real.cells]
     n.real.cells <- ncol(data)
   }
 
