@@ -24,7 +24,7 @@ paramSweep <- function(seu, PCs=1:10, sct = FALSE, num.cores=1) {
 
   if (nrow(seu@meta.data) <= 10000){
     real.cells <- rownames(seu@meta.data)
-    data <- seu@assays$RNA$counts
+    data <- seu@assays[["RNA"]]@counts
     n.real.cells <- ncol(data)
   }
 
